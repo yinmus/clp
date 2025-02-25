@@ -7,7 +7,8 @@ git clone https://github.com/yinmus/clp.git
 cd clp
 ```
 
-**Установка зависмостей**
+**Установка зависмостей**:
+
 `Простая Компиляция`:
 
 ```bash
