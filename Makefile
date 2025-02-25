@@ -2,8 +2,8 @@ CC = gcc
 CFLAGS = -Wall -Wextra -O2
 LIBS = -lSDL2 -lSDL2_mixer
 
-TARGET = audioplayer
-SRC = main.c
+TARGET = cl
+SRC = cl.c
 
 all:
 	$(CC) $(CFLAGS) $(SRC) -o $(TARGET) $(LIBS)
