@@ -17,4 +17,4 @@
 
 Guide:
 
-[`installer-guide`](ins/installer-dc.md) / [`Makefile-guide`](ins/makefile-dc.md 
+[`installer-guide`](ins/installer-dc.md) / [`Makefile-guide`](ins/makefile-dc.md)
