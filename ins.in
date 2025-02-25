@@ -1,1 +1,0 @@
-gcc cll.c -o cll -lSDL2 -lSDL2_mixer $(sdl2-config --cflags --libs)
