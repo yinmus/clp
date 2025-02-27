@@ -22,7 +22,7 @@ if [ "$INSTALL_DEPS" = "y" ]; then
     fi
 fi
 
-echo "Компилировать? [y/n]:"
+echo "Компилировать? [y/n]: "
 read -r COMPILE
 
 if [ "$COMPILE" = "y" ]; then
