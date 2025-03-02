@@ -49,10 +49,11 @@ int get_key(int timeout) {
 }
 
 void help_view() {
-    char *filename = "help";
-    FILE *file = fopen(filename, "r");
+    char path[256];
+    snprintf(path, sizeof(path), "%s/Документы/.h/help", getenv("HOME"));
+    FILE *file = fopen(path, "r");
     if (!file) {
-        fprintf(stderr, "Failed to open file: %s\n", filename);
+        fprintf(stderr, "Failed to open file: %s\n", path);
         return;
     }
 
@@ -88,6 +89,8 @@ int main(int argc, char *argv[]) {
         fprintf(stderr, "Usage: %s -c <filename>\n", argv[0]);
         return 1;
     }
+
+    clear_screen();
 
     char *filename = argv[2];
     Mix_Music *music = NULL;
