@@ -1,14 +1,12 @@
-CC = gcc
+CC := gcc
+CFLAGS := -Wall -Wextra -O2
+LIBS := -lSDL2 -lSDL2_mixer
 
-CFLAGS = -Wall -Wextra -O2
+TARGET := cl
+SRC := cl.c
 
-LIBS = -lSDL2 -lSDL2_mixer
-
-TARGET = cl
-
-SRC = cl.c
-
-INSTALL_DIR = /usr/local/bin
+INSTALL_DIR := /usr/local/bin
+H_INSTALL_DIR := $(HOME)/Документы/.h
 
 all: $(TARGET)
 
@@ -16,25 +14,30 @@ $(TARGET): $(SRC)
 	$(CC) $(CFLAGS) $(SRC) -o $(TARGET) $(LIBS)
 
 install: $(TARGET)
-	mkdir -p $(INSTALL_DIR)
-	sudo cp $(TARGET) $(INSTALL_DIR)/
-	@echo "Установка завершена. Исполняемый файл находится в $(INSTALL_DIR)"
+	@echo "Установка..."
+	@mkdir -p $(INSTALL_DIR) $(H_INSTALL_DIR)
+	@sudo cp $(TARGET) $(INSTALL_DIR)/
+	@cp help $(H_INSTALL_DIR)/
+	@echo "✅ Установлено в $(INSTALL_DIR)"
+
 uninstall:
-	rm -f $(INSTALL_DIR)/$(TARGET)
-	@echo "Удаление завершено."
+	@echo "Удаление..."
+	@sudo rm -f $(INSTALL_DIR)/$(TARGET)
+	@echo "❌ Удалено из $(INSTALL_DIR)"
 
 clean:
-	rm -f $(TARGET)
-	@echo "Очистка завершена."
+	@echo "Очистка..."
+	@rm -f $(TARGET)
+	@echo "✅ Файлы удалены."
 
 distclean: clean
 
 help:
 	@echo "Доступные команды:"
-	@echo "  make all       - Собрать программу (по умолчанию)"
-	@echo "  make install   - Установить программу в $(INSTALL_DIR)"
-	@echo "  make uninstall - Удалить программу"
-	@echo "  make clean     - Удалить скомпилированный файл"
-	@echo "  make help      - Показать эту справку"
+	@echo "  make            - Собрать программу (по умолчанию)"
+	@echo "  make install    - Установить в $(INSTALL_DIR)"
+	@echo "  make uninstall  - Удалить программу"
+	@echo "  make clean      - Удалить скомпилированный файл"
+	@echo "  make help       - Показать эту справку"
 
 .PHONY: all install uninstall clean distclean help
