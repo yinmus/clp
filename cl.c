@@ -4,27 +4,44 @@
 #include <string.h>
 #include <unistd.h>
 #include <termios.h>
+#include <sys/select.h>
+#include <sys/time.h>
 #include <time.h>
 
 #define BAR_WIDTH 20
 
-void clear_screen() {
+void ext_enc(const char *filename, char *output, size_t size);
+
+void cls() {
     system("clear");
 }
 
-void print_ui(int elapsed, int total, int volume, int is_paused) {
+void UI(int elapsed, int total, int volume, int is_paused, int show_filename, const char *filename) {
     int progress = (elapsed * BAR_WIDTH) / total;
+    int volume_bar = (volume * 5) / MIX_MAX_VOLUME;
+
+    cls();
+
+    if (show_filename) {
+        char name_without_extension[256];
+        ext_enc(filename, name_without_extension, sizeof(name_without_extension));
+        printf("%s\n", name_without_extension);
+    }
+
     printf("\rT : %02d:%02d / %02d:%02d  [", elapsed / 60, elapsed % 60, total / 60, total % 60);
     for (int i = 0; i < BAR_WIDTH; i++) {
         printf(i < progress ? "=" : "-");
     }
-    printf("]  ");
-    printf("V : %d%%  ", volume);
-    printf("M : %s   ", is_paused ? "[ ⏸  ]" : "[ ▶ ]");
+    printf("]  V : [");
+    for (int i = 0; i < 5; i++) {
+        printf(i < volume_bar ? "#" : "-");
+    }
+    printf("] %d%%  ", (volume * 100) / MIX_MAX_VOLUME);
+    printf("M : %s   ", is_paused ? "Pause" : "Play");
     fflush(stdout);
 }
 
-int get_key(int timeout) {
+int keys(int timeout) {
     struct termios oldt, newt;
     fd_set set;
     struct timeval tv;
@@ -48,51 +65,39 @@ int get_key(int timeout) {
     return ch;
 }
 
-void help_view() {
+void help() {
     char path[256];
     snprintf(path, sizeof(path), "%s/Документы/.h/help", getenv("HOME"));
-    FILE *file = fopen(path, "r");
-    if (!file) {
-        fprintf(stderr, "Failed to open file: %s\n", path);
-        return;
+    char command[512];
+    snprintf(command, sizeof(command), "man %s", path);
+    system(command);
+    cls();
+}
+
+void ext_enc(const char *filename, char *output, size_t size) {
+    const char *last_slash = strrchr(filename, '/');
+    const char *last_dot = strrchr(filename, '.');
+
+    if (last_slash == NULL) last_slash = filename;
+    else last_slash++;
+
+    if (last_dot == NULL || last_dot < last_slash) {
+        snprintf(output, size, "%s", last_slash);
+    } else {
+        size_t length = last_dot - last_slash;
+        snprintf(output, size, "%.*s", (int)length, last_slash);
     }
-
-    clear_screen();
-    printf("---(Press 'q' to exit)---\n");
-
-    char buffer[256];
-    while (fgets(buffer, sizeof(buffer), file)) {
-        printf("%s", buffer);
-    }
-
-    fclose(file);
-
-    printf("\n-----------------------\n");
-
-    char input[10];
-    while (1) {
-        printf(":");
-        if (fgets(input, sizeof(input), stdin)) {
-            if (strcmp(input, "q\n") == 0) {
-                break;
-            } else {
-                printf("Unknown command. Type 'q' to exit.\n");
-            }
-        }
-    }
-
-    clear_screen();
 }
 
 int main(int argc, char *argv[]) {
-    if (argc != 3 || strcmp(argv[1], "-c") != 0) {
-        fprintf(stderr, "Usage: %s -c <filename>\n", argv[0]);
+    if (argc != 2) {
+        fprintf(stderr, "Usage: %s <filename>\n", argv[0]);
         return 1;
     }
 
-    clear_screen();
+    cls();
 
-    char *filename = argv[2];
+    char *filename = argv[1];
     Mix_Music *music = NULL;
 
     if (SDL_Init(SDL_INIT_AUDIO) < 0) {
@@ -123,12 +128,13 @@ int main(int argc, char *argv[]) {
     int total_time = Mix_MusicDuration(music);
     int key;
     int seek_step = 5;
+    int show_filename = 0;
 
     while (running && Mix_PlayingMusic()) {
         int elapsed = Mix_GetMusicPosition(music);
-        print_ui(elapsed, total_time, (volume * 100) / MIX_MAX_VOLUME, is_paused);
+        UI(elapsed, total_time, volume, is_paused, show_filename, filename);
 
-        key = get_key(1);
+        key = keys(1);
         switch (key) {
             case '=': case '+':
                 if (volume < MIX_MAX_VOLUME) volume += MIX_MAX_VOLUME / 20;
@@ -175,12 +181,15 @@ int main(int argc, char *argv[]) {
                     fprintf(stderr, "Seek not supported for this format\n");
                 }
                 break;
+            case 'N':
+                show_filename = !show_filename;
+                break;
             case 'a':
                 if (!is_paused) {
                     Mix_PauseMusic();
                     is_paused = 1;
                 }
-                help_view();
+                help();
                 if (is_paused) {
                     Mix_ResumeMusic();
                     is_paused = 0;
