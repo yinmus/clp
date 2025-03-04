@@ -67,7 +67,7 @@ int keys(int timeout) {
 
 void help() {
     char path[256];
-    snprintf(path, sizeof(path), "%s/Документы/.h/help", getenv("HOME"));
+    snprintf(path, sizeof(path), "%s/Документы/.help/help.1", getenv("HOME"));
     char command[512];
     snprintf(command, sizeof(command), "man %s", path);
     system(command);
