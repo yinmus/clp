@@ -1,0 +1,44 @@
+.TH HELP 1 "March 2025" "Version 1.0" "CLP help"
+.SH clp
+help \- справка по клавишам
+
+.SH KEYS
+.TP
+.B +
+Увеличить громкость на 5%.
+.TP
+.B -
+Уменьшить громкость на 5%.
+.TP
+.B m
+Максимальная громкость.
+.TP
+.B n
+Отключить звук.
+.TP
+.B SPACE
+Пауза / продолжить воспроизведение.
+.TP
+.B q
+Выход из программы.
+.TP
+.B h
+Перемотка назад на 5 секунд.
+.TP
+.B l
+Перемотка вперёд на 5 секунд.
+.TP
+.B shift h
+Перемотка назад на 10 секунд.
+.TP
+.B shift n
+Показать / скрыть название трека.
+.TP
+.B a
+Показать справку (этот экран).
+.SH AUTHOR
+by yinmus : https://github.com/yinmus
+.SH GITHUB REPO
+https://github.com/yinmus/clp
+.SH SEE ALSO
+https://github.com/yinmus?tab=repositories
