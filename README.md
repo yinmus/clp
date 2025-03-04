@@ -26,12 +26,9 @@ Guide:
 **Запуск**
 
 ```bash
-cl -c /path/to/file.mp3
+cl /path/to/file.mp3
 ```
 
-```bash
-cl -c file.mp3
-```
 ___
 Клавиши:
 
