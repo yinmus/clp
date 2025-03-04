@@ -6,7 +6,7 @@ TARGET := cl
 SRC := cl.c
 
 INSTALL_DIR := /usr/local/bin
-H_INSTALL_DIR := $(HOME)/Документы/.h
+H_INSTALL_DIR := $(HOME)/Документы/.help
 
 all: $(TARGET)
 
@@ -17,7 +17,7 @@ install: $(TARGET)
 	@echo "Установка..."
 	@mkdir -p $(INSTALL_DIR) $(H_INSTALL_DIR)
 	@sudo cp $(TARGET) $(INSTALL_DIR)/
-	@cp help $(H_INSTALL_DIR)/
+	@cp help.1 $(H_INSTALL_DIR)/
 	@echo "✅ Установлено в $(INSTALL_DIR)"
 
 uninstall:
