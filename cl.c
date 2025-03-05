@@ -7,6 +7,8 @@
 #include <sys/select.h>
 #include <sys/time.h>
 #include <time.h>
+#include <stdlib.h>
+#include <libgen.h>
 
 #define BAR_WIDTH 20
 
@@ -89,6 +91,12 @@ void ext_enc(const char *filename, char *output, size_t size) {
     }
 }
 
+int extract_audio(const char *input_file, char *output_file) {
+    char command[512];
+    snprintf(command, sizeof(command), "ffmpeg -y -i \"%s\" -vn -acodec pcm_s16le -ar 44100 -ac 2 \"%s\"", input_file, output_file);
+    return system(command);
+}
+
 int main(int argc, char *argv[]) {
     if (argc != 2) {
         fprintf(stderr, "Usage: %s <filename>\n", argv[0]);
@@ -98,6 +106,25 @@ int main(int argc, char *argv[]) {
     cls();
 
     char *filename = argv[1];
+    char temp_filename[] = "/tmp/audio_XXXXXX.wav";
+    int is_video = 0;
+
+    if (strstr(filename, ".mp4") || strstr(filename, ".avi") || strstr(filename, ".mkv")) {
+        is_video = 1;
+        int fd = mkstemps(temp_filename, 4);
+        if (fd == -1) {
+            perror("Failed to create temporary file");
+            return 1;
+        }
+        close(fd);
+
+        if (extract_audio(filename, temp_filename) != 0) {
+            fprintf(stderr, "Failed to extract audio from video\n");
+            return 1;
+        }
+        filename = temp_filename;
+    }
+
     Mix_Music *music = NULL;
 
     if (SDL_Init(SDL_INIT_AUDIO) < 0) {
@@ -206,5 +233,10 @@ cleanup_mixer:
     Mix_CloseAudio();
 cleanup_sdl:
     SDL_Quit();
+
+    if (is_video) {
+        remove(temp_filename);
+    }
+
     return 0;
 }
