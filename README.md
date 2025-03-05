@@ -17,11 +17,11 @@ ___
 ## Запуск и установка
 **Установка:**
 
-[`installer`](installer.sh) / [`Makefile`](Makefile)
+[`Makefile`](Makefile)
 
 Guide:
 
-[`installer-guide`](ins/installer-dc.md) / [`Makefile-guide`](ins/makefile-dc.md)
+[`Makefile-guide`](ins/makefile-dc.md)
 
 **Запуск**
 
