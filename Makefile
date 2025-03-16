@@ -1,4 +1,4 @@
-CC := gcc
+1CC := gcc
 CFLAGS := -Wall -Wextra -O2
 LIBS := -lSDL2 -lSDL2_mixer
 
@@ -30,7 +30,6 @@ clean:
 	@rm -f $(TARGET)
 	@echo "✅ Файлы удалены."
 
-distclean: clean
 
 help:
 	@echo "Доступные команды:"
