@@ -24,6 +24,8 @@ int KeyBind = 71; // ASCII
 char KeyBind = 'G';
 */
 
+
+// кстати не все клавиши можно забиндить, мне лень, кому надо, думаю сам сделает
 const char kshortback = ','; // 44
 const char kshortforwd ='.'; // 46
 const char klongback =  '<'; // 60
