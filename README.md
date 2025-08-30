@@ -20,9 +20,6 @@ ___
 
 [`Makefile`](Makefile)
 
-Guide:
-
-[`Makefile-guide`](ins/makefile-dc.md)
 
 **Запуск**
 
