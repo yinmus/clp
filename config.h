@@ -10,12 +10,12 @@ const char scls[] =           "clear";  // command to clear screan
 const int sshortstep =        5;        // value of short step
 const int slongstep =         10;       // value of long step
 bool soutputname =            true;     // default
-const int sdefaultsound =     18;       // default sound
-bool isloop =                 false;
-const bool srewindaftswitch = true;
+const int sdefaultsound =     18;       // default sound в cl.c расчет с float, но там погрешность в районе ~>1 значения 
+bool isloop =                 false;    // кому надо может поставить цикл по дефолту
+const bool srewindaftswitch = true;     // после переключения цикличного / обычного проигрывания перематывать на то место, когда было переключение
 /* KEY binds;!
 
-char / int / long...;
+char / int / long - в теории все равно (если тебе все равно на размер бинарника (char - оптимально)!)
 
 // equilalent
 
