@@ -30,6 +30,3 @@ cl /path/to/file.mp3
 ```
 
 ___
-Клавиши:
-
-a - help
