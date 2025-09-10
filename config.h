@@ -9,9 +9,9 @@
 const char scls[] = "clear";    // command to clear screan
 const int sshortstep = 5;       // value of short step
 const int slongstep = 10;       // value of long step
-inline bool soutputname = true; // default
+bool soutputname = true; // default
 const int sdefaultsound = 18;   // default sound
-inline bool isloop = false;
+bool isloop = false;
 const bool srewindaftswitch = true;
 /* KEY binds;!
 
