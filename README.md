@@ -17,17 +17,14 @@ ___
 ## Запуск и установка
 **Установка:**
 
-[`installer`](installer.sh) / [`Makefile`](Makefile)
-
-
 **Запуск**
 
 ```bash
-cl -c /path/to/file.ext
+cl -p /path/to/file.ext
 ```
 
 ```bash
-cl -c file.ext
+cl -p file.ext
 ```
 ___
 
@@ -46,6 +43,7 @@ ___
 
 `q` (q) - Выйти
 
+**это были +- главные кейбинды, их там больше, но все в конфиге есть**
 
 ___
 
