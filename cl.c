@@ -11,10 +11,9 @@
 #include <unistd.h>
 
 #include "config.h"
+#define BAR_WIDTH 30
 
 bool running;
-
-#define BAR_WIDTH 30
 
 void handle_signal(int signal) { running = 0; }
 
