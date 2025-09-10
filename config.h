@@ -26,8 +26,8 @@ char KeyBind = 'G';
 
 const char kshortback = ',';  // 44
 const char kshortforwd = '.'; // 46
-const char klongback = '<';   // 60
-const char klongforwd = '>';  // 62
+const char klongback = 'h';   // 60
+const char klongforwd = 'l';  // 62
 const char kquit = 'q';       // 113
 const char ktobeg = '0';      // 48
 const char koutname = 'N';    // 78
