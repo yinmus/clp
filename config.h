@@ -6,16 +6,16 @@
 
 // Settings;
 
-const char scls[] =           "clear";  // command to clear screan
-const int sshortstep =        5;        // value of short step
-const int slongstep =         10;       // value of long step
-bool soutputname =            true;     // default
-const int sdefaultsound =     18;       // default sound в cl.c расчет с float, но там погрешность в районе ~>1 значения 
-bool isloop =                 false;    // кому надо может поставить цикл по дефолту
-const bool srewindaftswitch = true;     // после переключения цикличного / обычного проигрывания перематывать на то место, когда было переключение
+const char scls[] = "clear";    // command to clear screan
+const int sshortstep = 5;       // value of short step
+const int slongstep = 10;       // value of long step
+inline bool soutputname = true; // default
+const int sdefaultsound = 18;   // default sound
+inline bool isloop = false;
+const bool srewindaftswitch = true;
 /* KEY binds;!
 
-char / int / long - в теории все равно (если тебе все равно на размер бинарника (char - оптимально)!)
+char / int / long...;
 
 // equilalent
 
@@ -24,13 +24,18 @@ int KeyBind = 71; // ASCII
 char KeyBind = 'G';
 */
 
-
-// кстати не все клавиши можно забиндить, мне лень, кому надо, думаю сам сделает
-const char kshortback = ','; // 44
-const char kshortforwd ='.'; // 46
-const char klongback =  '<'; // 60
-const char klongforwd = '>'; // 62
-const char kquit =      'q'; // 113
-const char ktobeg =     '0'; // 48
+const char kshortback = ',';  // 44
+const char kshortforwd = '.'; // 46
+const char klongback = '<';   // 60
+const char klongforwd = '>';  // 62
+const char kquit = 'q';       // 113
+const char ktobeg = '0';      // 48
+const char koutname = 'N';    // 78
+const char ksound_p = '=';    // 43
+const char ksound_m = '-';    // 45
+const char kmaxvol = 'm';     // 109
+const char kmute = 'n';       // 110
+const char kpause = ' ';      // 32
+const char kloop = 'r';       // 114
 
 #endif
