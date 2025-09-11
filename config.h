@@ -15,10 +15,6 @@ bool isloop = false;
 const bool srewindaftswitch = true;
 /* KEY binds;!
 
-char / int / long...;
-
-// equilalent
-
 char KeyBind 71; // ASCII
 int KeyBind = 71; // ASCII
 char KeyBind = 'G';
