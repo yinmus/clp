@@ -13,12 +13,6 @@ bool soutputname = true; // default
 const int sdefaultsound = 18;   // default sound
 bool isloop = false;
 const bool srewindaftswitch = true;
-/* KEY binds;!
-
-char KeyBind 71; // ASCII
-int KeyBind = 71; // ASCII
-char KeyBind = 'G';
-*/
 
 const char kshortback = ',';  // 44
 const char kshortforwd = '.'; // 46
