@@ -6,7 +6,7 @@
 
 // Settings;
 
-const char scls[] = "clear";    // command to clear screan
+const char scls[] = "clear";    // command to clear scr
 const int sshortstep = 5;       // value of short step
 const int slongstep = 10;       // value of long step
 bool soutputname = true; // default
